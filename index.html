@@ -1,310 +1,264 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mueblería D.j</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mueblería D.j</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5e9d3;
+            color: #4b2e12;
+        }
 
-<style>
-/* GENERAL */
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: #f5eee6;
-  color: #4a3b2f;
-  scroll-behavior: smooth;
-}
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #8b5a2b;
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
 
-/* HEADER */
-header {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  background: #8B5A2B;
-  color: #fff;
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 999;
-}
+        header a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-header h1 {
-  margin: 0;
-  font-size: 20px;
-}
+        /* Secciones */
+        section {
+            padding: 80px 20px;
+        }
 
-nav {
-  display: flex;
-  gap: 20px;
-}
+        h1, h2 {
+            color: #5e3c1a;
+        }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-}
+        /* Catálogo */
+        .catalogo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
 
-/* MENU MOVIL */
-.menu-btn {
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  cursor: pointer;
-}
+        .item {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
 
-.menu-btn div {
-  width: 25px;
-  height: 3px;
-  background: white;
-}
+        .item img {
+            width: 100%;
+            border-radius: 10px;
+            height: 150px;
+            object-fit: cover;
+        }
 
-@media (max-width: 768px) {
-  nav {
-    position: absolute;
-    top: 60px; right: 0;
-    background: #8B5A2B;
-    flex-direction: column;
-    width: 200px;
-    padding: 20px;
-    display: none;
-  }
-  nav.show {
-    display: flex;
-  }
-  .menu-btn {
-    display: flex;
-  }
-}
+        .btn {
+            background: #8b5a2b;
+            color: white;
+            padding: 10px 15px;
+            margin-top: 10px;
+            display: inline-block;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-/* HERO */
-.hero {
-  padding: 120px 20px;
-  text-align: center;
-  background: url('https://i.imgur.com/k2j5eHB.jpeg') center/cover no-repeat;
-  color: white;
-}
+        /* Chatbot */
+        #dj-chatbot-btn {
+          position: fixed;
+          bottom: 25px;
+          right: 25px;
+          background: #8b5a2b;
+          color: white;
+          width: 55px;
+          height: 55px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 26px;
+          cursor: pointer;
+          z-index: 9999;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
 
-.hero h2 {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
+        #dj-chatbot-box {
+          position: fixed;
+          bottom: 95px;
+          right: 25px;
+          width: 320px;
+          height: 420px;
+          background: #fff8f0;
+          border-radius: 15px;
+          display: none;
+          flex-direction: column;
+          overflow: hidden;
+          z-index: 9999;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
 
-/* TITULOS */
-.section-title {
-  text-align: center;
-  margin-top: 50px;
-  font-size: 28px;
-  font-weight: bold;
-}
+        #dj-chat-header {
+          background: #8b5a2b;
+          padding: 12px;
+          color: white;
+          font-weight: bold;
+          text-align: center;
+        }
 
-/* CATALOGO */
-.catalogo {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
+        #dj-chat-messages {
+          flex: 1;
+          padding: 10px;
+          overflow-y: auto;
+          font-size: 14px;
+        }
 
-.item {
-  background: #fff;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
+        #dj-chat-input-area {
+          display: flex;
+          border-top: 1px solid #ccc;
+        }
 
-.item img {
-  width: 100%;
-  border-radius: 10px;
-}
+        #dj-chat-input {
+          flex: 1;
+          border: none;
+          padding: 10px;
+          font-size: 14px;
+        }
 
-.btn {
-  margin-top: 10px;
-  padding: 10px 15px;
-  background: #BA7B34;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* MODAL GALERIAS */
-.modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: #fff;
-  max-width: 500px;
-  padding: 20px;
-  border-radius: 12px;
-}
-
-.modal-content h3 {
-  text-align: center;
-}
-
-.gallery img {
-  width: 100%;
-  margin-top: 10px;
-  border-radius: 10px;
-}
-
-.close-btn {
-  background: #d9534f;
-  padding: 10px;
-  color: white;
-  width: 100%;
-  border: none;
-  margin-top: 10px;
-  border-radius: 8px;
-}
-
-/* CONTACTO */
-.contacto {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.whatsapp {
-  background: #25D366;
-  padding: 15px 20px;
-  color: white;
-  display: inline-block;
-  border-radius: 10px;
-  font-size: 20px;
-  text-decoration: none;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #8B5A2B;
-  color: white;
-  margin-top: 40px;
-}
-
-</style>
+        #dj-chat-send {
+          background: #8b5a2b;
+          color: white;
+          border: none;
+          padding: 10px 14px;
+          cursor: pointer;
+        }
+    </style>
 </head>
-
 <body>
 
 <header>
-  <h1>Mueblería D.j</h1>
-
-  <div class="menu-btn" onclick="toggleMenu()">
-    <div></div><div></div><div></div>
-  </div>
-
-  <nav id="menu">
-    <a href="#inicio">Inicio</a>
-    <a href="#catalogo">Catálogo</a>
-    <a href="#sobre">Sobre Nosotros</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
+    <div>Mueblería D.j</div>
+    <div>
+        <a href="#inicio">Inicio</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#nosotros">Sobre Nosotros</a>
+        <a href="#contacto">Contacto</a>
+    </div>
 </header>
 
-<section id="inicio" class="hero">
-  <h2>Muebles de Melamina & Mesas de Madera</h2>
-  <p>Calidad, estilo y buenos precios para tu hogar.</p>
+<section id="inicio">
+    <h1>Bienvenido a Mueblería D.j</h1>
+    <p>Muebles de melamina y mesas de madera hechos con calidad y cariño.</p>
 </section>
 
-<h2 class="section-title">Catálogo</h2>
+<section id="catalogo">
+    <h2>Catálogo</h2>
+    <div class="catalogo">
 
-<section id="catalogo" class="catalogo">
+        <div class="item">
+            <img src="https://via.placeholder.com/300x200" />
+            <h3>Reposteros</h3>
+            <div class="btn">Ver más</div>
+        </div>
 
-  <!-- REPSTEROS -->
-  <div class="item">
-    <img src="https://via.placeholder.com/300x200" alt="">
-    <h3>Reposteros</h3>
-    <button class="btn" onclick="openModal('Reposteros')">Ver Más</button>
-  </div>
+        <div class="item">
+            <img src="https://via.placeholder.com/300x200" />
+            <h3>Roperos</h3>
+            <div class="btn">Ver más</div>
+        </div>
 
-  <!-- ROPEROS -->
-  <div class="item">
-    <img src="https://via.placeholder.com/300x200" alt="">
-    <h3>Roperos</h3>
-    <button class="btn" onclick="openModal('Roperos')">Ver Más</button>
-  </div>
+        <div class="item">
+            <img src="https://via.placeholder.com/300x200" />
+            <h3>Cómodas</h3>
+            <div class="btn">Ver más</div>
+        </div>
 
-  <!-- COMODAS -->
-  <div class="item">
-    <img src="https://via.placeholder.com/300x200" alt="">
-    <h3>Cómodas</h3>
-    <button class="btn" onclick="openModal('Cómodas')">Ver Más</button>
-  </div>
+        <div class="item">
+            <img src="https://via.placeholder.com/300x200" />
+            <h3>Sillas</h3>
+            <div class="btn">Ver más</div>
+        </div>
 
-  <!-- SILLAS -->
-  <div class="item">
-    <img src="https://via.placeholder.com/300x200" alt="">
-    <h3>Sillas</h3>
-    <button class="btn" onclick="openModal('Sillas')">Ver Más</button>
-  </div>
+        <div class="item">
+            <img src="https://via.placeholder.com/300x200" />
+            <h3>Juegos de Mesa</h3>
+            <div class="btn">Ver más</div>
+        </div>
 
-  <!-- JUEGOS DE MESA -->
-  <div class="item">
-    <img src="https://via.placeholder.com/300x200" alt="">
-    <h3>Juegos de Mesa</h3>
-    <button class="btn" onclick="openModal('Juegos de Mesa')">Ver Más</button>
-  </div>
-
+    </div>
 </section>
 
-<h2 id="sobre" class="section-title">Sobre Nosotros</h2>
-<section class="contacto">
-  <p>Somos Mueblería D.j, especialistas en muebles de melamina y mesas de madera, ofreciendo calidad y estilo para tu hogar.</p>
+<section id="nosotros">
+    <h2>Sobre Nosotros</h2>
+    <p>Somos Mueblería D.j, dedicados a ofrecer muebles de calidad con acabados profesionales y resistencia garantizada.</p>
 </section>
 
-<h2 id="contacto" class="section-title">Contacto</h2>
-<section class="contacto">
-  <a class="whatsapp" href="https://wa.me/51993642775" target="_blank">
-    Escríbenos por WhatsApp
-  </a>
+<section id="contacto">
+    <h2>Contacto</h2>
+    <p>Escríbenos mediante nuestro chatbot para cualquier consulta o pedido.</p>
 </section>
 
-<footer>
-  © 2026 Mueblería D.j — Todos los derechos reservados.
-</footer>
+<!-- CHATBOT IA GRATIS -->
+<div id="dj-chatbot-btn">💬</div>
 
-<!-- MODAL -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <h3 id="modal-title"></h3>
-    <div class="gallery" id="gallery"></div>
-    <button class="close-btn" onclick="closeModal()">Cerrar</button>
+<div id="dj-chatbot-box">
+  <div id="dj-chat-header">Asistente IA - Mueblería D.j</div>
+  <div id="dj-chat-messages"></div>
+  <div id="dj-chat-input-area">
+    <input id="dj-chat-input" type="text" placeholder="Escribe tu mensaje...">
+    <button id="dj-chat-send">Enviar</button>
   </div>
 </div>
 
 <script>
-function toggleMenu() {
-  document.getElementById("menu").classList.toggle("show");
+// Abrir/cerrar chat
+document.getElementById("dj-chatbot-btn").onclick = () => {
+  let box = document.getElementById("dj-chatbot-box");
+  box.style.display = (box.style.display === "flex") ? "none" : "flex";
+};
+
+// IA simple GRATIS
+function aiResponse(msg) {
+  msg = msg.toLowerCase();
+
+  if (msg.includes("precio")) return "Los precios dependen del modelo. ¿Qué mueble te interesa?";
+  if (msg.includes("hola") || msg.includes("buenas")) return "¡Hola! ¿En qué puedo ayudarte hoy?";
+  if (msg.includes("repostero")) return "Nuestros reposteros son de melamina resistente. ¿Quieres ver modelos?";
+  if (msg.includes("ropero")) return "Tenemos roperos de varias medidas y colores. ¿Deseas información?";
+  if (msg.includes("cómoda")) return "Las cómodas vienen en distintos tamaños. ¿Qué estilo buscas?";
+  if (msg.includes("madera")) return "Nuestras mesas de madera son super resistentes. ¿Qué tamaño quieres?";
+
+  return "Puedo ayudarte con información de muebles, precios, medidas y modelos. Pregúntame nomás.";
 }
 
-function openModal(tipo) {
-  document.getElementById("modal-title").innerText = tipo;
+// Enviar mensaje
+document.getElementById("dj-chat-send").onclick = () => {
+  let input = document.getElementById("dj-chat-input");
+  let text = input.value.trim();
+  if (!text) return;
 
-  let gallery = document.getElementById("gallery");
-  gallery.innerHTML = `
-    <img src="https://via.placeholder.com/400x250?text=${tipo}+1">
-    <img src="https://via.placeholder.com/400x250?text=${tipo}+2">
-    <img src="https://via.placeholder.com/400x250?text=${tipo}+3">
-  `;
+  let chat = document.getElementById("dj-chat-messages");
+  chat.innerHTML += `<div><b>Tú:</b> ${text}</div>`;
 
-  document.getElementById("modal").style.display = "flex";
-}
+  setTimeout(() => {
+    let r = aiResponse(text);
+    chat.innerHTML += `<div><b>Bot:</b> ${r}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+  }, 400);
 
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-}
+  input.value = "";
+};
 </script>
 
 </body>
