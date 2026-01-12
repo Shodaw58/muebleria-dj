@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mueblería D.j</title>
+
+<style>
+/* GENERAL */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #f5eee6;
+  color: #4a3b2f;
+  scroll-behavior: smooth;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  background: #8B5A2B;
+  color: #fff;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 999;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* MENU MOVIL */
+.menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.menu-btn div {
+  width: 25px;
+  height: 3px;
+  background: white;
+}
+
+@media (max-width: 768px) {
+  nav {
+    position: absolute;
+    top: 60px; right: 0;
+    background: #8B5A2B;
+    flex-direction: column;
+    width: 200px;
+    padding: 20px;
+    display: none;
+  }
+  nav.show {
+    display: flex;
+  }
+  .menu-btn {
+    display: flex;
+  }
+}
+
+/* HERO */
+.hero {
+  padding: 120px 20px;
+  text-align: center;
+  background: url('https://i.imgur.com/k2j5eHB.jpeg') center/cover no-repeat;
+  color: white;
+}
+
+.hero h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+/* TITULOS */
+.section-title {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* CATALOGO */
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.item img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.btn {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #BA7B34;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* MODAL GALERIAS */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.modal-content h3 {
+  text-align: center;
+}
+
+.gallery img {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.close-btn {
+  background: #d9534f;
+  padding: 10px;
+  color: white;
+  width: 100%;
+  border: none;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* CONTACTO */
+.contacto {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.whatsapp {
+  background: #25D366;
+  padding: 15px 20px;
+  color: white;
+  display: inline-block;
+  border-radius: 10px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #8B5A2B;
+  color: white;
+  margin-top: 40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Mueblería D.j</h1>
+
+  <div class="menu-btn" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <nav id="menu">
+    <a href="#inicio">Inicio</a>
+    <a href="#catalogo">Catálogo</a>
+    <a href="#sobre">Sobre Nosotros</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<section id="inicio" class="hero">
+  <h2>Muebles de Melamina & Mesas de Madera</h2>
+  <p>Calidad, estilo y buenos precios para tu hogar.</p>
+</section>
+
+<h2 class="section-title">Catálogo</h2>
+
+<section id="catalogo" class="catalogo">
+
+  <!-- REPSTEROS -->
+  <div class="item">
+    <img src="https://via.placeholder.com/300x200" alt="">
+    <h3>Reposteros</h3>
+    <button class="btn" onclick="openModal('Reposteros')">Ver Más</button>
+  </div>
+
+  <!-- ROPEROS -->
+  <div class="item">
+    <img src="https://via.placeholder.com/300x200" alt="">
+    <h3>Roperos</h3>
+    <button class="btn" onclick="openModal('Roperos')">Ver Más</button>
+  </div>
+
+  <!-- COMODAS -->
+  <div class="item">
+    <img src="https://via.placeholder.com/300x200" alt="">
+    <h3>Cómodas</h3>
+    <button class="btn" onclick="openModal('Cómodas')">Ver Más</button>
+  </div>
+
+  <!-- SILLAS -->
+  <div class="item">
+    <img src="https://via.placeholder.com/300x200" alt="">
+    <h3>Sillas</h3>
+    <button class="btn" onclick="openModal('Sillas')">Ver Más</button>
+  </div>
+
+  <!-- JUEGOS DE MESA -->
+  <div class="item">
+    <img src="https://via.placeholder.com/300x200" alt="">
+    <h3>Juegos de Mesa</h3>
+    <button class="btn" onclick="openModal('Juegos de Mesa')">Ver Más</button>
+  </div>
+
+</section>
+
+<h2 id="sobre" class="section-title">Sobre Nosotros</h2>
+<section class="contacto">
+  <p>Somos Mueblería D.j, especialistas en muebles de melamina y mesas de madera, ofreciendo calidad y estilo para tu hogar.</p>
+</section>
+
+<h2 id="contacto" class="section-title">Contacto</h2>
+<section class="contacto">
+  <a class="whatsapp" href="https://wa.me/51993642775" target="_blank">
+    Escríbenos por WhatsApp
+  </a>
+</section>
+
+<footer>
+  © 2026 Mueblería D.j — Todos los derechos reservados.
+</footer>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3 id="modal-title"></h3>
+    <div class="gallery" id="gallery"></div>
+    <button class="close-btn" onclick="closeModal()">Cerrar</button>
+  </div>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("show");
+}
+
+function openModal(tipo) {
+  document.getElementById("modal-title").innerText = tipo;
+
+  let gallery = document.getElementById("gallery");
+  gallery.innerHTML = `
+    <img src="https://via.placeholder.com/400x250?text=${tipo}+1">
+    <img src="https://via.placeholder.com/400x250?text=${tipo}+2">
+    <img src="https://via.placeholder.com/400x250?text=${tipo}+3">
+  `;
+
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
