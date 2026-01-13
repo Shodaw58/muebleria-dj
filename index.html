@@ -1,117 +1,215 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mueblería D.J - Chatbot</title>
+<meta charset="UTF-8">
+<title>Mueblería D.J</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
+
 body {
-    background: #f2f2f2;
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
-}
-
-.container {
-    max-width: 450px;
-    margin: auto;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #0003;
-    padding: 20px;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 15px;
+    font-family: Arial, sans-serif;
+    background: #f6f6f6;
     color: #333;
 }
 
-#chat {
-    height: 380px;
+.header {
+    background: #ffffff;
+    padding: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.items {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.chatbot-container {
+    width: 350px;
+    height: 480px;
+    background: white;
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    border-radius: 18px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background: #ffcf34;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    border-bottom: 2px solid #e5b900;
+}
+
+.chat-body {
+    padding: 10px;
+    flex: 1;
     overflow-y: auto;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #fafafa;
+    background: #f7f7f7;
 }
 
-.message {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 85%;
+.bot-msg, .user-msg {
+    margin: 8px 0;
+    padding: 12px;
+    max-width: 80%;
+    border-radius: 12px;
 }
 
-.bot {
-    background: #e3f2fd;
-    color: #000;
+.bot-msg {
+    background: #e8f0ff;
 }
 
-.user {
-    background: #d1ffd1;
+.user-msg {
+    background: #c4ffc4;
     margin-left: auto;
 }
 
-input, button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+.chat-input {
+    display: flex;
+    padding: 8px;
+    background: #f0f0f0;
 }
 
-button {
-    background: #007bff;
-    color: white;
-    font-weight: bold;
+.chat-input input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
 }
 
-.contacto-box {
-    background: #fff3cd;
-    padding: 10px;
+.chat-input button {
+    background: #ffb500;
+    border: none;
+    padding: 10px 14px;
+    margin-left: 8px;
     border-radius: 8px;
-    border-left: 4px solid #ffbb00;
-    margin-bottom: 15px;
+    cursor: pointer;
 }
+
+.bubble {
+    width: 70px;
+    height: 70px;
+    background: #ffb500;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    cursor: pointer;
+    animation: float 2s infinite ease-in-out;
+}
+
+.bubble img {
+    width: 42px;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+}
+
 </style>
+
 </head>
-
 <body>
-<div class="container">
-    <h2>🪑 Mueblería D.J</h2>
 
-    <div class="contacto-box">
-        <b>📞 Contacto directo:</b><br>
-        WhatsApp: +51 999 999 999<br>
-        Dirección: Av. Los Laureles 123, Lima<br>
-        Horario: 9am a 8pm
+<div class="header">
+    <h1>🪑 Mueblería D.J</h1>
+    <p>Los mejores muebles al mejor precio — Lima, Perú</p>
+</div>
+
+<div class="container">
+
+    <h2>Catálogo Destacado</h2>
+
+    <div class="items">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1582582494700-7f88cfe7b60b" alt="">
+            <h3>Sofá 3 cuerpos</h3>
+            <p>Elegante, cómodo y resistente.</p>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956" alt="">
+            <h3>Cama matrimonial</h3>
+            <p>Marco de madera premium.</p>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1615870216519-2f9fa011294f" alt="">
+            <h3>Ropero 6 puertas</h3>
+            <p>Amplio espacio y diseño moderno.</p>
+        </div>
     </div>
 
-    <div id="chat"></div>
+</div>
 
-    <input type="text" id="userInput" placeholder="Escribe tu mensaje..." />
-    <button onclick="sendMessage()">Enviar</button>
+<div id="chatBot" class="chatbot-container">
+
+    <div class="chat-header">Chat Mueblería D.J</div>
+
+    <div class="chat-body" id="chatBody">
+        <div class="bot-msg">¡Hola! 👋 Bienvenido a *Mueblería D.J*.  
+        ¿Qué deseas ver hoy?</div>
+    </div>
+
+    <div class="chat-input">
+        <input id="userInput" placeholder="Escribe tu mensaje...">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
+
+</div>
+
+<div class="bubble" onclick="toggleChat()">
+    <img src="https://cdn-icons-png.flaticon.com/512/ speech-bubble.png">
 </div>
 
 <script>
-const chat = document.getElementById("chat");
-
-function botReply(text) {
-    let msg = document.createElement("div");
-    msg.className = "message bot";
-    msg.innerHTML = text;
-    chat.appendChild(msg);
-    chat.scrollTop = chat.scrollHeight;
-}
-
-function userReply(text) {
-    let msg = document.createElement("div");
-    msg.className = "message user";
-    msg.innerText = text;
-    chat.appendChild(msg);
-    chat.scrollTop = chat.scrollHeight;
+function toggleChat() {
+    const chat = document.getElementById("chatBot");
+    chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
 }
 
 function sendMessage() {
@@ -119,57 +217,17 @@ function sendMessage() {
     let text = input.value.trim();
     if (text === "") return;
 
-    userReply(text);
+    let body = document.getElementById("chatBody");
+
+    body.innerHTML += `<div class="user-msg">${text}</div>`;
     input.value = "";
 
     setTimeout(() => {
-        botLogic(text.toLowerCase());
-    }, 400);
-}
+        body.innerHTML += `<div class="bot-msg">No te preocupes, causa 😎. Cuéntame qué mueble estás buscando y te ayudo al toque.</div>`;
+        body.scrollTop = body.scrollHeight;
+    }, 600);
 
-function botLogic(msg) {
-
-    if (msg.includes("hola") || msg.includes("buenas") || msg.includes("que tal")) {
-        botReply("¡Hola! 👋 Bienvenido a *Mueblería D.J*. ¿Qué deseas ver hoy?<br><br>🪑 Salas<br>🛏️ Camas<br>🗄️ Roperos<br>🛋️ Sofa-cama<br>🍽️ Comedores<br><br>O dime qué buscas y te ayudo.");
-        return;
-    }
-
-    if (msg.includes("sala") || msg.includes("sillón") || msg.includes("sofa")) {
-        botReply("Tenemos salas desde *S/ 450* en colores gris, beige y azul. ¿Quieres ver modelos o precios exactos?");
-        return;
-    }
-
-    if (msg.includes("cama")) {
-        botReply("Tenemos camas de plaza, plaza y media, y dos plazas desde *S/ 380*. ¿Quieres ver modelos?");
-        return;
-    }
-
-    if (msg.includes("ropero")) {
-        botReply("Roperos modernos desde *S/ 299*. ¿Deseas ver diseños disponibles?");
-        return;
-    }
-
-    if (msg.includes("comedor")) {
-        botReply("Los comedores de 4 y 6 sillas están desde *S/ 520*. ¿Te muestro fotos?");
-        return;
-    }
-
-    if (msg.includes("precio") || msg.includes("cuánto") || msg.includes("vale")) {
-        botReply("Claro causa ✨, dime el producto y te digo el precio exacto.");
-        return;
-    }
-
-    if (msg.includes("whatsapp") || msg.includes("contacto") || msg.includes("numero")) {
-        botReply("📞 Nuestro WhatsApp directo es:<br><b>+51 999 999 999</b><br>Estamos para atenderte.");
-        return;
-    }
-
-    if (msg.includes("comprar") || msg.includes("me lo llevo") || msg.includes("quiero uno")) {
-        botReply("Perfecto 👍 Para avanzar con tu compra, solo necesito:<br>- Modelo<br>- Color<br>- Dirección de entrega<br>- Nombre completo");
-        return;
-    }
-
-    botReply("No entendí muy bien eso 😅. Pero dime qué mueble buscas y te ayudo de una, causa.");
+    body.scrollTop = body.scrollHeight;
 }
 </script>
 
